@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/header/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,12 +24,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = {
+    id: "1",
+    name: "test",
+    email: "test@test.com",
+    image: "https://github.com/shadcn.png",
+    role: "client",
+  };
+
+  // const user = null;
+
   return (
-    <html lang="en">
+    <html lang='ja'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className='flex min-h-screen flex-col'>
+          <Header user={user} />
+          {children}
+        </div>
       </body>
     </html>
   );
