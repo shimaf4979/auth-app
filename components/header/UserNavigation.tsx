@@ -4,20 +4,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import Image from "next/image";
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-  role: string;
-}
+import { User } from "@prisma/client";
 
 interface UserNavigationProps {
   user: User;
@@ -40,23 +31,6 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className='bg-white p-2 w-[300px]' align='center'>
-          <Link href={`/user/${user.id}`}>
-            <DropdownMenuItem className='cursor-pointer'>
-              <div className='break-words min-w-0'>
-                <div className='mb-2'>{user.name || ""}</div>
-                <div className='text-gray-500'>{user.email || ""}</div>
-              </div>
-            </DropdownMenuItem>
-          </Link>
-
-          <DropdownMenuSeparator />
-
-          <Link href='/settings/profile'>
-            <DropdownMenuItem className='cursor-pointer'>
-              アカウント設定
-            </DropdownMenuItem>
-          </Link>
-
           <DropdownMenuItem
             onSelect={async (event) => {
               event.preventDefault();
